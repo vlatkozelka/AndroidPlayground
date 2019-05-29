@@ -10,28 +10,29 @@ import org.notests.rxfeedback.Optional
  * Created by Ali on 5/29/2019.
  */
 data class State(
-        //splash
-        var authentication: LoadState<Doctor> = LoadState.IsLoading(),
+    //splash
+    var authentication: LoadState<Doctor> = LoadState.IsLoading(),
 
 
-        //login
-        var loginID: String = "",
-        var loginState: LoadState<Doctor> = LoadState.Initial(),
+    //login
+    var loginID: String = "",
+    var loginState: LoadState<Doctor> = LoadState.Initial(),
 
-        //add patient
+    //add patient
 
-        var addPatientState: LoadState<Unit> = LoadState.Initial(),
-        var addPatientName: String = "",
-        var addPatientNumber: String = "",
-        var addPatientDeviceSerial: String = "",
+    var addPatientState: LoadState<Unit> = LoadState.Initial(),
+    var addPatientName: String = "",
+    var addPatientNumber: String = "",
+    var addPatientDeviceSerial: String = "",
 
 
-        //patient profile
-        var currentPatient: Optional<Patient> = Optional.None(),
+    //patient profile
+    var currentPatient: Optional<Patient> = Optional.None(),
+    var addSignature: Optional<Int> = Optional.None(),
 
-        //Navigation
-        var currentFragmentTag: String = TAG_SPLASH_FRAGMENT,
-        var route: Optional<Route> = Optional.None()
+    //Navigation
+    var currentFragmentTag: String = TAG_SPLASH_FRAGMENT,
+    var route: Optional<Route> = Optional.None()
 ) {
 
 

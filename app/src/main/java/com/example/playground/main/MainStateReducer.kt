@@ -13,8 +13,6 @@ import org.notests.rxfeedback.Optional
  */
 
 object MainStateReducer {
-
-
     fun reduce(state: State, event: Event): State {
         Log.d("ReduceEvent", event.toString())
         return when (event) {
@@ -114,7 +112,22 @@ object MainStateReducer {
             }
 
             is Event.ClickedSignReport -> state.copy().apply {
+                addSignature = Optional.Some(event.position)
+            }
 
+
+            Event.CanceledSignReport -> state.copy().apply {
+                addSignature = Optional.None()
+            }
+
+            is Event.SignedReport -> state.copy().apply {
+
+                val currentPatient = currentPatient
+                val addSignature = this.addSignature
+                if (currentPatient is Optional.Some && addSignature is Optional.Some) {
+                    currentPatient.data.reports[addSignature.data].signature = event.comment
+                }
+                this.addSignature = Optional.None()
             }
         }
     }

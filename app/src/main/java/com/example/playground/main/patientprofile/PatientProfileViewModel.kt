@@ -11,9 +11,9 @@ import java.text.SimpleDateFormat
 
 
 data class ReportViewModel(
-        val type: String,
-        val signature: String?,
-        val date: String
+    val type: String,
+    val signature: String?,
+    val date: String
 ) {
     val signatureVisibility: Int
         get() {
@@ -21,6 +21,15 @@ data class ReportViewModel(
                 View.VISIBLE
             } else {
                 View.GONE
+            }
+        }
+
+    val signBtnVisibility: Int
+        get() {
+            return if (signature != null) {
+                View.GONE
+            } else {
+                View.VISIBLE
             }
         }
 }
@@ -34,9 +43,9 @@ val State.reportViewModels: List<ReportViewModel>
             is Optional.Some -> {
                 currentPatient.data.reports.map {
                     ReportViewModel(
-                            it.type,
-                            it.signature,
-                            dateFormat.format(it.date)
+                        it.type,
+                        it.signature,
+                        dateFormat.format(it.date)
                     )
                 }
             }

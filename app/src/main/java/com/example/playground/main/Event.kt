@@ -35,6 +35,8 @@ sealed class Event {
 
     data class ClickedViewReport(val position: Int) : Event()
     data class ClickedSignReport(val position: Int) : Event()
+    object CanceledSignReport : Event()
+    data class SignedReport(val comment: String) : Event()
 
     //Navigation
 

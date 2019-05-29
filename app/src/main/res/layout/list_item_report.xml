@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_small">
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/spacing_small">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_small">
-
-        <TextView
-            android:id="@+id/txt_report_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText"
-            tools:text="Blood test" />
-
-        <TextView
-            android:id="@+id/txt_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textSize="12sp"
-            tools:text="5/3/2019" />
-
-        <TextView
-            android:id="@+id/txt_signature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txt_report_type"
-            tools:text="Some random comment about the report" />
+            android:padding="@dimen/spacing_small">
 
-        <Button
-            android:id="@+id/btn_sign"
-            style="@style/NormalButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@id/txt_signature"
-            android:layout_alignParentEnd="true"
-            android:textSize="@dimen/report_btn_text_size"
-            android:text="@string/sign" />
+        <TextView
+                android:id="@+id/txt_report_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText"
+                tools:text="Blood test"/>
 
-        <Button
-            android:id="@+id/btn_view_report"
-            style="@style/NormalButtonStyle"
-            android:textSize="@dimen/report_btn_text_size"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/view_report"
-            android:layout_below="@id/txt_signature"
-            android:layout_toStartOf="@+id/btn_sign"
+        <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textSize="12sp"
+                tools:text="5/3/2019"/>
+
+        <TextView
+                android:id="@+id/txt_signature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_report_type"
+                tools:text="Some random comment about the report"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_signature"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+        >
+            <Button
+                    android:id="@+id/btn_sign"
+                    style="@style/NormalButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textSize="@dimen/report_btn_text_size"
+                    android:text="@string/sign"/>
+
+            <Button
+                    android:id="@+id/btn_view_report"
+                    style="@style/NormalButtonStyle"
+                    android:textSize="@dimen/report_btn_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="@string/view_report"
             />
+        </LinearLayout>
+
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -25,7 +25,7 @@ class ReportsAdapter : RecyclerView.Adapter<ReportsAdapter.ReportViewHolder>() {
 
     override fun onCreateViewHolder(container: ViewGroup, position: Int): ReportViewHolder {
         return ReportViewHolder(
-                LayoutInflater.from(container.context).inflate(R.layout.list_item_report, container, false)
+            LayoutInflater.from(container.context).inflate(R.layout.list_item_report, container, false)
         )
     }
 
@@ -51,6 +51,7 @@ class ReportsAdapter : RecyclerView.Adapter<ReportsAdapter.ReportViewHolder>() {
             txtSignature.visibility = reportViewModel.signatureVisibility
             txtDate.text = reportViewModel.date
             btnSign.setOnClickListener { clicks.onNext(Event.ClickedSignReport(position)) }
+            btnSign.visibility = reportViewModel.signBtnVisibility
             btnViewReport.setOnClickListener { clicks.onNext(Event.ClickedViewReport(position)) }
         }
     }

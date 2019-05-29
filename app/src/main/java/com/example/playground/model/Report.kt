@@ -10,7 +10,7 @@ data class Report(
         val date: Date,
         val document: String,
         val type: String,
-        val signature: String? = null
+        var signature: String? = null
 ) {
 
     companion object {

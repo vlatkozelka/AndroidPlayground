@@ -11,7 +11,7 @@
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
         app:image_size="@dimen/avatar_size"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/avatar"
         app:border_width="3dp"
         app:border_color="@color/colorPrimary"
         />
