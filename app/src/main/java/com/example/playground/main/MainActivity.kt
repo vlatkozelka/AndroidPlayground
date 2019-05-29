@@ -3,30 +3,25 @@ package com.example.playground.main
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.playground.R
+import com.example.playground.utils.rx.attachFeedbacks
 import com.zippyyum.subtemp.utilities.watchChanges
 import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import org.notests.rxfeedback.Bindings
 import org.notests.rxfeedback.bindSafe
 import org.notests.rxfeedback.system
 import org.notests.sharedsequence.*
 
-data class State(
-    var name: String = "World"
-)
-
-sealed class Event {
-    object TestBtnClicked : Event()
-    data class NameChanged(val name: String) : Event()
-}
-
 
 typealias Feedback = (Driver<State>) -> Signal<Event>
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity(), FragmentListener {
 
     val disposables = arrayListOf<Disposable>()
+    val eventsSubject = PublishSubject.create<Event>()
+    val eventsSignal = Signal(eventsSubject)
+    var stateDriver: Driver<State>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +32,12 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        val systemDisposable = Driver.system(
+        stateDriver = Driver.system(
             State(),
             MainStateReducer::reduce,
             bindUI()
         )
-            .drive()
-        disposables.add(systemDisposable)
+        stateDriver?.let { disposables.add(it.drive()) }
     }
 
     override fun onPause() {
@@ -56,12 +50,38 @@ class MainActivity : AppCompatActivity() {
         return bindSafe<State, Event> { stateDriver ->
             Bindings.safe(
                 subscriptions = listOf(
-                    stateDriver.map { it.greetingText }.distinctUntilChanged().drive { txt_greeting.text = it }
                 ),
                 events = listOf(
-                    edt_name.watchChanges<Event> { Event.NameChanged(it) }
+                    Signal.never()
                 )
             )
         }
     }
+
+    fun bindEventsSubject(): Feedback {
+        return bindSafe<State, Event> { stateDriver ->
+            Bindings.safe(
+                subscriptions = listOf(
+                    //no UI changes here
+                ),
+                events = listOf(
+                    eventsSignal
+                )
+            )
+
+        }
+    }
+
+
+    override fun onFragmentResumed() {
+
+    }
+
+    override fun onAttachFeedbacks(vararg feedbacks: (Driver<State>) -> Signal<Event>) {
+        stateDriver?.let { driver ->
+            attachFeedbacks(driver, eventsSubject, *feedbacks)
+        }
+    }
+
+
 }

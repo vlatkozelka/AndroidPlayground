@@ -8,15 +8,10 @@ object MainStateReducer {
 
 
     fun reduce(state: State, event: Event): State {
-
-        return when (event) {
-            Event.TestBtnClicked -> state.copy().apply {
-
-            }
-            is Event.NameChanged -> state.copy().apply {
-                this.name = event.name
-            }
-        }
+        return state
     }
+
+
+
 
 }
