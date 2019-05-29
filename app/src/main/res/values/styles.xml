@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorSecondary</item>
     </style>
 
+    <style name="NormalButtonStyle">
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+    </style>
+
 </resources>

@@ -5,4 +5,7 @@
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_xlarge">32dp</dimen>
+
+
+    <dimen name="login_progress_bar">72dp</dimen>
 </resources>

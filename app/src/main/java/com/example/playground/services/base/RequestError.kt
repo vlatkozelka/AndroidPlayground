@@ -18,6 +18,14 @@ data class RequestError(
             return RequestError(666, "error parsing response")
         }
 
+        fun notFoundError(): RequestError{
+            return RequestError(404, "Not found")
+        }
+
+        fun authenticationError(): RequestError{
+            return RequestError(401, "Not authenticated")
+        }
+
         @JvmStatic
         fun <T> arrayParsingError(t: Class<T>): RequestError {//todo fix error code and localization
             return RequestError(

@@ -9,4 +9,10 @@
     <color name="colorSecondaryDark">#38006b</color>
     <color name="colorPrimaryText">#000000</color>
     <color name="colorSecondaryText">#ffffff</color>
+
+
+
+    <color name="colorSuccess">#86C14A</color>
+    <color name="colorFailure">#EE3F2F</color>
+
 </resources>
