@@ -3,20 +3,16 @@ package com.example.playground.main
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.playground.R
-import com.example.playground.addpatient.AddPatientFragment
-import com.example.playground.main.MainActivity.Companion.TAG_ADD_PATIENT_FRAGMENT
-import com.example.playground.main.MainActivity.Companion.TAG_LOGIN_FRAGMENT
-import com.example.playground.main.MainActivity.Companion.TAG_PATIENTS_FRAGMENT
+import com.example.playground.main.addpatient.AddPatientFragment
 import com.example.playground.main.login.LoginFragment
+import com.example.playground.main.patientprofile.PatientProfileFragment
 import com.example.playground.main.patients.PatientsFragment
 import com.example.playground.main.splash.SplashFragment
 import com.example.playground.utils.exhaustive
 import com.example.playground.utils.rx.attachFeedbacks
 import com.example.playground.utils.rx.collectNotNull
-import com.zippyyum.subtemp.utilities.watchChanges
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.activity_main.*
 import org.notests.rxfeedback.Bindings
 import org.notests.rxfeedback.Optional
 import org.notests.rxfeedback.bindSafe
@@ -118,11 +114,12 @@ class MainActivity : AppCompatActivity(), FragmentListener {
                 replaceFragment(TAG_ADD_PATIENT_FRAGMENT, AddPatientFragment())
             }
             State.Route.PatientProfile -> {
-                replaceFragment(TAG_PATIENTS_FRAGMENT, PatientsFragment())
+                replaceFragment(TAG_PATIENTS_FRAGMENT, PatientProfileFragment())
             }
             is State.Route.ViewReport -> {
                 replaceFragment(TAG_PATIENTS_FRAGMENT, PatientsFragment())
             }
+            State.Route.Quit -> finish()
         }.exhaustive
     }
 
@@ -132,6 +129,10 @@ class MainActivity : AppCompatActivity(), FragmentListener {
                 .replace(R.id.container, fragment, tag)
                 .commitAllowingStateLoss()
 
+    }
+
+    override fun onBackPressed() {
+        eventsSubject.onNext(Event.BackPressed)
     }
 
 

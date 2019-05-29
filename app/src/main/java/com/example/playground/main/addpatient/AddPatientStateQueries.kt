@@ -1,7 +1,7 @@
-package com.example.playground.addpatient
+package com.example.playground.main.addpatient
 
-import com.example.playground.Model.Patient
-import com.example.playground.Model.Report
+import com.example.playground.model.Patient
+import com.example.playground.model.Report
 import com.example.playground.main.State
 import com.zippyyum.subtemp.rxfeedback.LoadState
 import org.notests.rxfeedback.Optional

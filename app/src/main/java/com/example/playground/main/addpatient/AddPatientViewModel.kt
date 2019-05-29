@@ -1,4 +1,4 @@
-package com.example.playground.addpatient
+package com.example.playground.main.addpatient
 
 import android.view.View
 import com.example.playground.main.State

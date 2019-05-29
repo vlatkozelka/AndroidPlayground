@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.playground.Model.Doctor
+import com.example.playground.model.Doctor
 import com.example.playground.R
 import com.example.playground.main.BaseFragment
 import com.example.playground.main.Event

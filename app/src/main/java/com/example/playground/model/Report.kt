@@ -1,6 +1,5 @@
-package com.example.playground.Model
+package com.example.playground.model
 
-import com.example.playground.utils.days
 import com.example.playground.utils.daysAgo
 import java.util.*
 

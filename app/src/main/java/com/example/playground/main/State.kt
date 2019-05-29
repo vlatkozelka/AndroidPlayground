@@ -1,11 +1,9 @@
 package com.example.playground.main
 
-import com.example.playground.Model.Doctor
+import com.example.playground.model.Doctor
 import com.example.playground.main.MainActivity.Companion.TAG_SPLASH_FRAGMENT
-import com.example.playground.services.base.RequestError
-import com.example.playground.utils.Result
+import com.example.playground.model.Patient
 import com.zippyyum.subtemp.rxfeedback.LoadState
-import okhttp3.Route
 import org.notests.rxfeedback.Optional
 
 /**
@@ -28,6 +26,9 @@ data class State(
         var addPatientDeviceSerial: String = "",
 
 
+        //patient profile
+        var currentPatient: Optional<Patient> = Optional.None(),
+
         //Navigation
         var currentFragmentTag: String = TAG_SPLASH_FRAGMENT,
         var route: Optional<Route> = Optional.None()
@@ -40,6 +41,7 @@ data class State(
         object AddPatient : Route()
         object PatientProfile : Route()
         data class ViewReport(val report: String) : Route()
+        object Quit : Route()
     }
 
 }

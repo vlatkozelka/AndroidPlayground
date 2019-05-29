@@ -1,4 +1,4 @@
-package com.example.playground.Model
+package com.example.playground.model
 
 /**
  * Created by Ali on 5/29/2019.

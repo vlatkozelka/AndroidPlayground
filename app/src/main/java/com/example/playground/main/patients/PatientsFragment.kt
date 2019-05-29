@@ -24,7 +24,7 @@ import org.notests.sharedsequence.map
  */
 class PatientsFragment : BaseFragment() {
 
-    private var adapter: PatientsAdapter? = null
+    private lateinit var adapter: PatientsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_patients, container, false)
@@ -51,14 +51,15 @@ class PatientsFragment : BaseFragment() {
 
 
     fun bindUI(): Feedback {
-        return bindSafe<State, Event> { state ->
+        return bindSafe { state ->
             Bindings.safe(
                     subscriptions = listOf(
-                            state.map { it.patientsViewModels }.distinctUntilChanged().drive { adapter?.update(it) },
+                            state.map { it.patientsViewModels }.distinctUntilChanged().drive { adapter.update(it) },
                             state.map { it.noPatientsTextVisibility }.distinctUntilChanged().drive { txt_no_patients.visibility = it }
                     ),
                     events = listOf(
-                            btn_add_patient.watchClicks<Event> { Event.ClickedAddPatient }
+                            btn_add_patient.watchClicks<Event> { Event.ClickedAddPatient },
+                            adapter.clicksSignal.map { Event.ClickedOnPatient(it) as Event }
                     )
             )
         }

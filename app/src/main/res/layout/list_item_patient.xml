@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/spacing_small">
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <com.example.playground.widget.CircularImageView
         android:id="@+id/img_patient"
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
+        app:image_size="@dimen/avatar_size"
         android:src="@mipmap/ic_launcher"
-
+        app:border_width="3dp"
+        app:border_color="@color/colorPrimary"
         />
 
     <TextView
         android:id="@+id/txt_patient_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Ali Alawieh"
-        android:layout_toEndOf="@+id/img_patient"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/spacing_large"
-        />
-
+        android:layout_toEndOf="@+id/img_patient"
+        tools:text="Ali Alawieh" />
 
 </RelativeLayout>

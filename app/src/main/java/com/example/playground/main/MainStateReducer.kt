@@ -1,10 +1,11 @@
 package com.example.playground.main
 
 import android.util.Log
-import com.example.playground.Model.Patient
+import com.example.playground.R
 import com.example.playground.utils.Prefs
 import com.example.playground.utils.Result
 import com.zippyyum.subtemp.rxfeedback.LoadState
+import com.zippyyum.subtemp.rxfeedback.getString
 import org.notests.rxfeedback.Optional
 
 /**
@@ -15,7 +16,7 @@ object MainStateReducer {
 
 
     fun reduce(state: State, event: Event): State {
-        Log.d("Event", event.toString())
+        Log.d("ReduceEvent", event.toString())
         return when (event) {
             is Event.NavigatedToFragment -> state.copy().apply {
                 route = Optional.None()
@@ -87,6 +88,23 @@ object MainStateReducer {
                 if (loginState is LoadState.Loaded && event.result is Result.Success) {
                     loginState.data.patients.add(event.result.obj)
                     route = Optional.Some(State.Route.Patients)
+                }
+            }
+
+            is Event.ClickedOnPatient -> state.copy().apply {
+                val loginState = this.loginState
+                if (loginState is LoadState.Loaded) {
+                    currentPatient = Optional.Some(loginState.data.patients[event.position])
+                    route = Optional.Some(State.Route.PatientProfile)
+                }
+            }
+
+            is Event.BackPressed -> state.copy().apply {
+                when (currentFragmentTag) {
+                    MainActivity.TAG_LOGIN_FRAGMENT -> route = Optional.Some(State.Route.Quit)
+                    MainActivity.TAG_PATIENTS_FRAGMENT -> route = Optional.Some(State.Route.Quit)
+                    MainActivity.TAG_ADD_PATIENT_FRAGMENT -> route = Optional.Some(State.Route.Patients)
+                    MainActivity.TAG_PATIENT_PROFILE_FRAGMENT -> route = Optional.Some(State.Route.Patients)
                 }
             }
 

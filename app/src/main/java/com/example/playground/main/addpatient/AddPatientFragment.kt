@@ -1,10 +1,10 @@
-package com.example.playground.addpatient
+package com.example.playground.main.addpatient
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.playground.Model.Patient
+import com.example.playground.model.Patient
 import com.example.playground.R
 import com.example.playground.main.BaseFragment
 import com.example.playground.main.Event

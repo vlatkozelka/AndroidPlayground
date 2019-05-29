@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,9 +8,11 @@
         android:id="@+id/txt_no_patients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_small"
         android:layout_centerVertical="true"
-        android:text="@string/you_don_t_have_any_patients_please_click_on_the_button_below_to_add_one" />
+        android:padding="@dimen/spacing_small"
+        android:text="@string/you_don_t_have_any_patients_please_click_on_the_button_below_to_add_one"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_patients"
@@ -18,14 +21,14 @@
         android:layout_below="@id/txt_no_patients">
 
     </android.support.v7.widget.RecyclerView>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_add_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/spacing_medium"
-        android:src="@drawable/baseline_add_white_48"
-        />
+        android:src="@drawable/baseline_add_white_48" />
 
 </RelativeLayout>
