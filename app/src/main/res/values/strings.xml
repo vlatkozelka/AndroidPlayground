@@ -9,4 +9,9 @@
     <string name="add_patient">Add patient</string>
     <string name="patient_profile">Patient profile</string>
     <string name="there_was_an_error_trying_to_sign_in_please_try_again">There was an error trying to sign in, please try again</string>
+    <string name="you_don_t_have_any_patients_please_click_on_the_button_below_to_add_one">You don\'t have any patients. Please click on the add button below to add one.</string>
+    <string name="patient_name">Patient name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="device_serial">Device serial</string>
+    <string name="add">Add</string>
 </resources>

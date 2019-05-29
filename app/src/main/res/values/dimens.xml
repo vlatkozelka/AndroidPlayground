@@ -8,4 +8,5 @@
 
 
     <dimen name="login_progress_bar">72dp</dimen>
+    <dimen name="avatar_size">60dp</dimen>
 </resources>

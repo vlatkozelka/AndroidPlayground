@@ -25,5 +25,7 @@ val State.actionBarTitle: String
 
 val State.isActionBarVisible: Boolean
     get() {
-        return currentFragmentTag != TAG_SPLASH_FRAGMENT
+        //return currentFragmentTag != TAG_SPLASH_FRAGMENT
+        //it looks stuttery when it hides then shows
+        return true
     }

@@ -3,6 +3,8 @@ package com.example.playground.main
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.playground.R
+import com.example.playground.addpatient.AddPatientFragment
+import com.example.playground.main.MainActivity.Companion.TAG_ADD_PATIENT_FRAGMENT
 import com.example.playground.main.MainActivity.Companion.TAG_LOGIN_FRAGMENT
 import com.example.playground.main.MainActivity.Companion.TAG_PATIENTS_FRAGMENT
 import com.example.playground.main.login.LoginFragment
@@ -16,6 +18,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import org.notests.rxfeedback.Bindings
+import org.notests.rxfeedback.Optional
 import org.notests.rxfeedback.bindSafe
 import org.notests.rxfeedback.system
 import org.notests.sharedsequence.*
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity(), FragmentListener {
     val eventsSubject = PublishSubject.create<Event>()
     val eventsSignal = Signal(eventsSubject)
     var stateDriver: Driver<State>? = null
+    var savedState: State? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +53,9 @@ class MainActivity : AppCompatActivity(), FragmentListener {
         super.onResume()
 
         stateDriver = Driver.system(
-                State(),
+                savedState ?: State(
+                        route = Optional.None()
+                ),
                 MainStateReducer::reduce,
                 bindUI()
         )
@@ -67,15 +73,10 @@ class MainActivity : AppCompatActivity(), FragmentListener {
         return bindSafe<State, Event> { stateDriver ->
             Bindings.safe(
                     subscriptions = listOf(
-                            stateDriver.map { it.isActionBarVisible }.distinctUntilChanged().drive {
-                                println("show action bar $it")
-                                showActionBar(it)
-                            },
-                            stateDriver.map { it.actionBarTitle }.distinctUntilChanged().drive {
-                                println("action bar title $it")
-                                supportActionBar?.title = it
-                            },
-                            stateDriver.map { it.route }.collectNotNull().distinctUntilChanged().drive { gotoRoute(it) }
+                            stateDriver.map { it.isActionBarVisible }.distinctUntilChanged().drive { showActionBar(it) },
+                            stateDriver.map { it.actionBarTitle }.distinctUntilChanged().drive { supportActionBar?.title = it },
+                            stateDriver.map { it.route }.collectNotNull().distinctUntilChanged().drive { gotoRoute(it) },
+                            stateDriver.drive { savedState = it }
                     ),
                     events = listOf(
                             eventsSignal
@@ -114,7 +115,7 @@ class MainActivity : AppCompatActivity(), FragmentListener {
                 replaceFragment(TAG_PATIENTS_FRAGMENT, PatientsFragment())
             }
             State.Route.AddPatient -> {
-                replaceFragment(TAG_PATIENTS_FRAGMENT, PatientsFragment())
+                replaceFragment(TAG_ADD_PATIENT_FRAGMENT, AddPatientFragment())
             }
             State.Route.PatientProfile -> {
                 replaceFragment(TAG_PATIENTS_FRAGMENT, PatientsFragment())
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity(), FragmentListener {
         }.exhaustive
     }
 
-    fun replaceFragment(tag: String, fragment: BaseFragment) {
+    private fun replaceFragment(tag: String, fragment: BaseFragment) {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, fragment, tag)

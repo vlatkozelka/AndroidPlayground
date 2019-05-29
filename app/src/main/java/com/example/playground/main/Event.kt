@@ -1,6 +1,7 @@
 package com.example.playground.main
 
 import com.example.playground.Model.Doctor
+import com.example.playground.Model.Patient
 import com.example.playground.services.base.RequestError
 import com.example.playground.utils.Result
 
@@ -17,6 +18,17 @@ sealed class Event {
     object ClickedLogin : Event()
     data class EnteredId(val id: String) : Event()
 
+    //Patients
+
+    object ClickedAddPatient : Event()
+
+    //Add Patients
+    object ClickedSubmitAddPatient : Event()
+
+    data class PatientNameChanged(val name: String) : Event()
+    data class PatientNumberChanged(val number: String) : Event()
+    data class PatientDeviceSerialChanged(val serial: String) : Event()
+    data class GotAddPatientResult(val result: Result<Patient, RequestError>) : Event()
 
     data class NavigatedToFragment(val tag: String) : Event()
 }

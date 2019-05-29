@@ -6,8 +6,10 @@ package com.example.playground.Model
 data class Doctor(
         val name: String,
         val id: String,
-        val patients: List<Patient> = listOf()
+        val patients: MutableList<Patient> = mutableListOf()
 ) {
+
+
 
 
     companion object {

@@ -1,6 +1,7 @@
 package com.example.playground.main
 
 import android.util.Log
+import com.example.playground.Model.Patient
 import com.example.playground.utils.Prefs
 import com.example.playground.utils.Result
 import com.zippyyum.subtemp.rxfeedback.LoadState
@@ -24,10 +25,12 @@ object MainStateReducer {
             is Event.ClickedLogin -> state.copy().apply {
                 loginState = LoadState.IsLoading()
             }
+
             is Event.GotAutoAuthenticationResult -> state.copy().apply {
                 when (event.result) {
                     is Result.Success -> {
                         authentication = LoadState.Loaded(event.result.obj)
+                        loginState = LoadState.Loaded(event.result.obj)
                         Prefs.setId(event.result.obj.id)
                         route = Optional.Some(State.Route.Patients)
                     }
@@ -43,8 +46,8 @@ object MainStateReducer {
                 when (event.result) {
                     is Result.Success -> {
                         authentication = LoadState.Loaded(event.result.obj)
-                        Prefs.setId(event.result.obj.id)
                         loginState = LoadState.Loaded(event.result.obj)
+                        Prefs.setId(event.result.obj.id)
                         route = Optional.Some(State.Route.Patients)
                     }
                     is Result.Failure -> {
@@ -58,6 +61,35 @@ object MainStateReducer {
             is Event.EnteredId -> state.copy().apply {
                 loginID = event.id
             }
+
+            Event.ClickedAddPatient -> state.copy().apply {
+                route = Optional.Some(State.Route.AddPatient)
+            }
+
+            Event.ClickedSubmitAddPatient -> state.copy().apply {
+                addPatientState = LoadState.IsLoading()
+            }
+
+            is Event.PatientNameChanged -> state.copy().apply {
+                addPatientName = event.name
+            }
+
+            is Event.PatientNumberChanged -> state.copy().apply {
+                addPatientNumber = event.number
+            }
+
+            is Event.PatientDeviceSerialChanged -> state.copy().apply {
+                addPatientDeviceSerial = event.serial
+            }
+
+            is Event.GotAddPatientResult -> state.copy().apply {
+                val loginState = this.loginState
+                if (loginState is LoadState.Loaded && event.result is Result.Success) {
+                    loginState.data.patients.add(event.result.obj)
+                    route = Optional.Some(State.Route.Patients)
+                }
+            }
+
         }
     }
 
