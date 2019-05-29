@@ -15,14 +15,15 @@ import com.example.playground.services.base.RequestError
 import com.example.playground.utils.Result
 import com.example.playground.utils.rx.asSignalLogFailure
 import com.example.playground.utils.rx.reactSafely
-import com.jakewharton.rxbinding2.view.clicks
 import com.zippyyum.subtemp.utilities.watchChanges
 import com.zippyyum.subtemp.utilities.watchClicks
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.notests.rxfeedback.Bindings
 import org.notests.rxfeedback.bindSafe
-import org.notests.sharedsequence.*
+import org.notests.sharedsequence.distinctUntilChanged
+import org.notests.sharedsequence.drive
+import org.notests.sharedsequence.map
 import java.util.concurrent.TimeUnit
 
 /**
@@ -46,7 +47,6 @@ class LoginFragment : BaseFragment() {
         if (disposable != null) {
             disposables.add(disposable)
         }
-
     }
 
 

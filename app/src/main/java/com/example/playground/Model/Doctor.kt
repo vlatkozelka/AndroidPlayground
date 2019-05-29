@@ -4,9 +4,9 @@ package com.example.playground.Model
  * Created by Ali on 5/29/2019.
  */
 data class Doctor(
-    val name: String,
-    val id: String,
-    val patients: List<Patient> = listOf()
+        val name: String,
+        val id: String,
+        val patients: List<Patient> = listOf()
 ) {
 
 
@@ -14,18 +14,22 @@ data class Doctor(
         fun getDoctors(): List<Doctor> {
 
             return arrayListOf(
-                Doctor(
-                    "Ali",
-                    "1"
-                ),
-                Doctor(
-                    "Walaa",
-                    "2"
-                ),
-                Doctor(
-                    "Imad",
-                    "3"
-                )
+                    Doctor(
+                            "Ali",
+                            "1",
+                            Patient.getPatients()
+
+                    ),
+                    Doctor(
+                            "Walaa",
+                            "2",
+                            Patient.getPatients()
+                    ),
+                    Doctor(
+                            "Imad",
+                            "3",
+                            Patient.getPatients()
+                    )
             )
         }
 
