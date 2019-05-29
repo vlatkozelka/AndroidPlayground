@@ -108,6 +108,14 @@ object MainStateReducer {
                 }
             }
 
+            is Event.ClickedViewReport -> state.copy().apply {
+                //should be dynamic, but I don't have any PDFs
+                route = Optional.Some(State.Route.ViewReport("http://www.africau.edu/images/default/sample.pdf"))
+            }
+
+            is Event.ClickedSignReport -> state.copy().apply {
+
+            }
         }
     }
 

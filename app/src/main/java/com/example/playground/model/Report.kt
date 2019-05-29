@@ -9,7 +9,8 @@ import java.util.*
 data class Report(
         val date: Date,
         val document: String,
-        val type: String
+        val type: String,
+        val signature: String? = null
 ) {
 
     companion object {
@@ -17,6 +18,84 @@ data class Report(
 
         fun getReports(): List<Report> {
             return listOf(
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A",
+                            "Some random comment from the doctor about the patient's test results"
+                    ),
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A"
+                    ),
+                    Report(
+                            3.daysAgo(),
+                            "document1",
+                            "Test type C"
+                    ),
+                    Report(
+                            2.daysAgo(),
+                            "document1",
+                            "Test type ADE"
+                    ),
+                    Report(
+                            1.daysAgo(),
+                            "document1",
+                            "Test type A31"
+                    ),
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A"
+                    ),
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A"
+                    ),
+                    Report(
+                            3.daysAgo(),
+                            "document1",
+                            "Test type C",
+                            "Some random comment from the doctor about the patient's test results"
+                    ),
+                    Report(
+                            2.daysAgo(),
+                            "document1",
+                            "Test type ADE"
+                    ),
+                    Report(
+                            1.daysAgo(),
+                            "document1",
+                            "Test type A31"
+                    ),
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A"
+                    ),
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A"
+                    ),
+                    Report(
+                            3.daysAgo(),
+                            "document1",
+                            "Test type C"
+                    ),
+                    Report(
+                            2.daysAgo(),
+                            "document1",
+                            "Test type ADE",
+                            "Some random comment from the doctor about the patient's test results"
+                    ),
+                    Report(
+                            1.daysAgo(),
+                            "document1",
+                            "Test type A31"
+                    ),
                     Report(
                             5.daysAgo(),
                             "document1",
@@ -40,7 +119,34 @@ data class Report(
                     Report(
                             1.daysAgo(),
                             "document1",
-                            "Test type A31"
+                            "Test type A31",
+                            "Some random comment from the doctor about the patient's test results"
+                    ),
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A"
+                    ),
+                    Report(
+                            5.daysAgo(),
+                            "document1",
+                            "Test type A"
+                    ),
+                    Report(
+                            3.daysAgo(),
+                            "document1",
+                            "Test type C"
+                    ),
+                    Report(
+                            2.daysAgo(),
+                            "document1",
+                            "Test type ADE"
+                    ),
+                    Report(
+                            1.daysAgo(),
+                            "document1",
+                            "Test type A31",
+                            "Some random comment from the doctor about the patient's test results"
                     )
             )
         }

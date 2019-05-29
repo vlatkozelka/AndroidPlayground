@@ -5,7 +5,6 @@ import com.example.playground.main.MainActivity.Companion.TAG_ADD_PATIENT_FRAGME
 import com.example.playground.main.MainActivity.Companion.TAG_LOGIN_FRAGMENT
 import com.example.playground.main.MainActivity.Companion.TAG_PATIENTS_FRAGMENT
 import com.example.playground.main.MainActivity.Companion.TAG_PATIENT_PROFILE_FRAGMENT
-import com.example.playground.main.MainActivity.Companion.TAG_SPLASH_FRAGMENT
 import com.zippyyum.subtemp.rxfeedback.getString
 
 /**

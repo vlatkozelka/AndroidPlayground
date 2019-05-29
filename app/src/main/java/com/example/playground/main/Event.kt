@@ -31,8 +31,13 @@ sealed class Event {
     data class PatientDeviceSerialChanged(val serial: String) : Event()
     data class GotAddPatientResult(val result: Result<Patient, RequestError>) : Event()
 
+    //patients profile
+
+    data class ClickedViewReport(val position: Int) : Event()
+    data class ClickedSignReport(val position: Int) : Event()
+
     //Navigation
 
     data class NavigatedToFragment(val tag: String) : Event()
-    object BackPressed: Event()
+    object BackPressed : Event()
 }

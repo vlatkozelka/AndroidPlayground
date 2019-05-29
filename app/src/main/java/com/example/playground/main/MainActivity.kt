@@ -1,5 +1,7 @@
 package com.example.playground.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.playground.R
@@ -49,11 +51,9 @@ class MainActivity : AppCompatActivity(), FragmentListener {
         super.onResume()
 
         stateDriver = Driver.system(
-                savedState ?: State(
-                        route = Optional.None()
-                ),
-                MainStateReducer::reduce,
-                bindUI()
+            savedState?.copy(route = Optional.None()) ?: State(),
+            MainStateReducer::reduce,
+            bindUI()
         )
         stateDriver?.let { disposables.add(it.drive()) }
         actionBar?.title = "test"
@@ -68,15 +68,15 @@ class MainActivity : AppCompatActivity(), FragmentListener {
     fun bindUI(): Feedback {
         return bindSafe<State, Event> { stateDriver ->
             Bindings.safe(
-                    subscriptions = listOf(
-                            stateDriver.map { it.isActionBarVisible }.distinctUntilChanged().drive { showActionBar(it) },
-                            stateDriver.map { it.actionBarTitle }.distinctUntilChanged().drive { supportActionBar?.title = it },
-                            stateDriver.map { it.route }.collectNotNull().distinctUntilChanged().drive { gotoRoute(it) },
-                            stateDriver.drive { savedState = it }
-                    ),
-                    events = listOf(
-                            eventsSignal
-                    )
+                subscriptions = listOf(
+                    stateDriver.map { it.isActionBarVisible }.distinctUntilChanged().drive { showActionBar(it) },
+                    stateDriver.map { it.actionBarTitle }.distinctUntilChanged().drive { supportActionBar?.title = it },
+                    stateDriver.map { it.route }.collectNotNull().distinctUntilChanged().drive { gotoRoute(it) },
+                    stateDriver.drive { savedState = it }
+                ),
+                events = listOf(
+                    eventsSignal
+                )
             )
         }
     }
@@ -117,7 +117,8 @@ class MainActivity : AppCompatActivity(), FragmentListener {
                 replaceFragment(TAG_PATIENTS_FRAGMENT, PatientProfileFragment())
             }
             is State.Route.ViewReport -> {
-                replaceFragment(TAG_PATIENTS_FRAGMENT, PatientsFragment())
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(route.report))
+                startActivity(browserIntent)
             }
             State.Route.Quit -> finish()
         }.exhaustive
@@ -125,9 +126,9 @@ class MainActivity : AppCompatActivity(), FragmentListener {
 
     private fun replaceFragment(tag: String, fragment: BaseFragment) {
         supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, fragment, tag)
-                .commitAllowingStateLoss()
+            .beginTransaction()
+            .replace(R.id.container, fragment, tag)
+            .commitAllowingStateLoss()
 
     }
 

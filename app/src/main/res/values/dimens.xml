@@ -9,4 +9,6 @@
 
     <dimen name="login_progress_bar">72dp</dimen>
     <dimen name="avatar_size">60dp</dimen>
+    <dimen name="avatar_size_large">120dp</dimen>
+    <dimen name="report_btn_text_size">10sp</dimen>
 </resources>
