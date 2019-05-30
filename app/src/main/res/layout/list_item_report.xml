@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 tools:text="5/3/2019"/>
 
         <TextView
@@ -37,21 +37,22 @@
                 android:layout_below="@id/txt_signature"
                 android:orientation="horizontal"
                 android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/spacing_medium"
         >
-            <Button
+            <TextView
                     android:id="@+id/btn_sign"
-                    style="@style/NormalButtonStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:textSize="@dimen/report_btn_text_size"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorSecondary"
+                    android:padding="@dimen/spacing_medium"
                     android:text="@string/sign"/>
 
-            <Button
+            <TextView
                     android:id="@+id/btn_view_report"
-                    style="@style/NormalButtonStyle"
-                    android:textSize="@dimen/report_btn_text_size"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorSecondary"
+                    android:padding="@dimen/spacing_medium"
                     android:text="@string/view_report"
             />
         </LinearLayout>

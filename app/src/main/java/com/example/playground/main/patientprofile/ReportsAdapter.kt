@@ -42,8 +42,8 @@ class ReportsAdapter : RecyclerView.Adapter<ReportsAdapter.ReportViewHolder>() {
         val txtType = view.findViewById<TextView>(R.id.txt_report_type)
         val txtSignature = view.findViewById<TextView>(R.id.txt_signature)
         val txtDate = view.findViewById<TextView>(R.id.txt_date)
-        val btnSign = view.findViewById<Button>(R.id.btn_sign)
-        val btnViewReport = view.findViewById<Button>(R.id.btn_view_report)
+        val btnSign = view.findViewById<TextView>(R.id.btn_sign)
+        val btnViewReport = view.findViewById<TextView>(R.id.btn_view_report)
 
         fun bind(reportViewModel: ReportViewModel, position: Int) {
             txtType.text = reportViewModel.type
